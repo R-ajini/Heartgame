@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart Mind Trainer</title>
+    <link rel="stylesheet" href="style.css?v=4" />
+  </head>
+  <body data-connect-page="app">
+    <!-- WELCOME -->
+    <section class="connect-screen" data-screen="welcome">
+      <div class="phone">
+        <h1><b>Welcome To Heart Mind Trainer</b></h1>
+
+        <h3>
+          <p>Hi there! Play Smart, Think Faster.</p>
+          <p>Log in or create an account.</p>
+        </h3>
+
+        <img src="../images/image.jpg" class="hero" alt="Heart Mind Trainer" />
+
+        <button class="btn white" data-nav="signup">Create Account</button>
+        <button class="btn outline" data-nav="login">Log In</button>
+      </div>
+    </section>
+
+    <!-- MAIN MENU -->
+    <section class="connect-screen" data-screen="mainmenu" hidden>
+      <div class="phone">
+        <h1>Game Title</h1>
+
+        <button class="btn gradient" data-nav="gameselect">PLAY</button>
+        <button class="btn gradient" data-nav="profile">Profile</button>
+        <button class="btn gradient" data-nav="leaderboard">Leaderboard</button>
+
+        <button class="btn white" id="logoutBtn">LOGOUT</button>
+        <br />
+
+        <img src="../images/img1.webp" class="menu-image" alt="Game Image" />
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="connect-screen" data-screen="profile" hidden>
+      <div class="container">
+        <img src="../images/image.jpg" class="avatar-small" alt="Profile Picture" />
+        <h3 id="username" style="color: navy; margin-top: 10px">Username</h3>
+        <p id="email" style="color: #555; margin-bottom: 20px">Email</p>
+
+        <p class="profile-subtitle">Player Profile</p>
+
+        <div class="stats">
+          <div class="stat-box">
+            <p>Games Played</p>
+            <h2 id="games">0</h2>
+          </div>
+          <div class="stat-box">
+            <p>Best Score</p>
+            <h2 id="best">0</h2>
+          </div>
+        </div>
+
+        <div class="member-box">
+          Member since: <span id="memberSince" class="member-since-value"></span>
+        </div>
+
+        <div class="profile-btn-row" style="gap: 15px">
+          <button class="btn-purple" data-nav="mainmenu">Back</button>
+          <button class="btn-purple" data-nav="score_history">View Score History</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section class="connect-screen" data-screen="leaderboard" hidden>
+      <div class="phone">
+        <h1 class="board-title">Leaderboard</h1>
+        <p class="board-subtitle">Top 5 Players Globally</p>
+
+        <div class="table-shell">
+          <table class="game-table leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th class="align-right">Best Score</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+              <tr>
+                <td colspan="3" class="table-message">Loading ranks...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class="btn white board-back-btn" data-nav="mainmenu">Back to Menu</button>
+      </div>
+    </section>
+
+    <!-- SCORE HISTORY -->
+    <section class="connect-screen" data-screen="score_history" hidden>
+      <div class="phone">
+        <h1 class="board-title">📜 Score History</h1>
+
+        <div class="table-shell history-shell">
+          <h3 class="history-title">10 Most Recent Games</h3>
+          <table class="game-table history-table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Game</th>
+                <th class="align-right">Score</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr>
+                <td colspan="3" class="table-message">Loading history...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <br />
+        <div class="row board-row-center">
+          <button class="btn white board-back-btn" data-nav="mainmenu">Back to Main Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="connect-screen" data-screen="result" hidden>
+      <div class="container">
+        <h1>🏆 Game Complete!</h1>
+        <p class="subtitle">Here are your results</p>
+
+        <div class="scoreBox">
+          <h2 id="totalScore">0</h2>
+          <p>Total Score</p>
+        </div>
+
+        <div class="grid">
+          <div class="card correct"><span id="correct">0</span><br />Correct</div>
+          <div class="card incorrect"><span id="incorrect">0</span><br />Incorrect</div>
+          <div class="card missed"><span id="missed">0</span><br />Missed</div>
+          <div class="card accuracy"><span id="accuracy">0</span>%<br />Accuracy</div>
+        </div>
+
+        <div class="btns">
+          <button class="play" data-nav="memory">Play Again</button>
+          <button class="menu" data-nav="gameselect">Back to Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="../controller/js/connect.js?v=2"></script>
+  </body>
+</html>

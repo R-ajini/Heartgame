@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose a game — Heart Mind Trainer</title>
+    <link rel="stylesheet" href="style.css?v=4" />
+  </head>
+  <body data-connect-page="gameselect">
+    <!-- GAME SELECT -->
+    <section class="connect-screen" data-screen="gameselect">
+      <div class="phone">
+        <h2>Let's PLAY</h2>
+
+        <button class="btn gradient" data-nav="heartgame">Heart Math Speedrun</button>
+        <br />
+        <button class="btn white" data-nav="memory">Memory Reaction Mode</button>
+        <br />
+        <button class="btn white" data-nav="puzzle">Puzzle Matching Challenger</button>
+
+        <br />
+        <button class="btn outline" data-nav="mainmenu">Back</button>
+
+        <p></p>
+        <img src="../images/img1.webp" class="menu-image" alt="Game Image" />
+      </div>
+    </section>
+
+     <!-- HEART GAME -->
+    <section class="connect-screen" data-screen="heartgame" hidden>
+      <div class="phone">
+        <h2>💖 Heart Math Speedrun</h2>
+
+        <div
+          id="levelSelection"
+          style="
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+          "
+        >
+          <p style="font-weight: bold; margin-bottom: 5px; font-size: 1.2rem">Select Difficulty:</p>
+          <button class="btn gradient" onclick="startGameWithLevel(60)" style="width: 200px">Easy (60s)</button>
+          <button class="btn gradient" onclick="startGameWithLevel(45)" style="width: 200px">Medium (45s)</button>
+          <button class="btn gradient" onclick="startGameWithLevel(30)" style="width: 200px">Hard (30s)</button>
+          <button class="btn outline" data-nav="gameselect" style="width: 200px">Back</button>
+        </div>
+
+        <div id="gameArea" style="display: none">
+          <div class="game-top">
+            <span>Score: <span id="heartScore">0</span></span>
+            <span>Time: <span id="heartTime">60</span>s</span>
+          </div>
+
+          <div class="heart-game" style="margin-top: 20px">
+            <img id="heartGameplayImg" class="heart-img" alt="Loading Heart Puzzle..." style="min-height: 200px" />
+          </div>
+
+          <div class="row" style="justify-content: center; margin-bottom: 20px">
+            <input
+              id="heartInput"
+              type="number"
+              inputmode="numeric"
+              placeholder="Enter answer and press Enter"
+              style="width: 100%; max-width: 260px; text-align: center; font-size: 1.2rem; padding: 10px"
+            />
+          </div>
+
+          <div id="feedbackMessage" style="text-align: center; font-weight: bold; min-height: 30px; margin-bottom: 20px">
+            Solve as many as you can before time runs out!
+          </div>
+
+          <div class="row" style="justify-content: center">
+            <button id="submitAnswerBtn" class="btn gradient">Submit</button>
+          </div>
+
+          <br />
+
+          <div class="row" style="justify-content: center">
+            <button class="btn outline" onclick="finishHeartGame()">Finish Early</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMORY GAME -->
+    <section class="connect-screen" data-screen="memory" hidden>
+      <div class="phone white-page" id="levelSelectScreen">
+        <h2>Memory - Reaction Mode</h2>
+
+        <div class="level-container">
+          <button class="level-btn" data-level="easy">
+            <h4>Easy</h4>
+            <p>6 cells<br />3s memorize<br />30s recall</p>
+          </button>
+
+          <button class="level-btn" data-level="medium">
+            <h4>Medium</h4>
+            <p>9 cells<br />2s memorize<br />20s recall</p>
+          </button>
+
+          <button class="level-btn" data-level="hard">
+            <h4>Hard</h4>
+            <p>12 cells<br />1.5s memorize<br />10s recall</p>
+          </button>
+        </div>
+
+        <button class="btn gradient" id="playBtn">PLAY</button>
+        <br /><br />
+        <button class="btn outline" data-nav="gameselect">Back</button>
+      </div>
+
+      <div class="phone" id="gameScreen" style="display: none">
+        <h2>Memory Reaction</h2>
+
+        <div class="status">
+          <div>&#10084;&#65039; Lives: <span id="lives">3</span></div>
+          <div>&#9201;&#65039; Time: <span id="time">0</span></div>
+          <div>&#11088; Score: <span id="score">0</span></div>
+        </div>
+
+        <div id="grid" class="grid"></div>
+
+        <button class="btn backBtn" onclick="finishGame()">Submit Answer</button>
+        <button class="btn backBtn" data-nav="gameselect">Quit</button>
+      </div>
+
+      <div class="phone" id="bonusScreen" style="display: none">
+        <h2>Heart Bonus Round!</h2>
+        <div style="text-align: center; margin: 20px 0">
+          <img
+            id="heartImage"
+            src=""
+            alt="Loading Heart Puzzle..."
+            style="max-width: 100%; border-radius: 10px"
+          />
+        </div>
+        <div style="text-align: center; margin-bottom: 20px">
+          <input
+            type="number"
+            id="heartAnswer"
+            placeholder="Enter puzzle answer"
+            style="width: 80%; padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc"
+          />
+        </div>
+        <button class="btn gradient" id="submitBonusBtn">Submit Bonus & Finish</button>
+      </div>
+    </section>
+
+    <!-- PUZZLE GAME -->
+    <section class="connect-screen" data-screen="puzzle" hidden>
+      <div class="phone">
+        <h2>💖 Heart Matching Challenge</h2>
+
+        <div class="game-top">
+          <span>&#11088; Score: <span id="puzzleScore">0</span></span>
+          <span>&#128308; Moves: <span id="puzzleMoves">0</span></span>
+          <span>&#9201;&#65039; Time: <span id="puzzleTime">60</span>s</span>
+        </div>
+
+        <div id="puzzleGrid" class="puzzle-grid"></div>
+
+        <button id="restartBtn" class="btn gradient">Restart</button>
+
+        <br /><br />
+
+        <button class="btn outline" onclick="finishPuzzleGame()">Finish Game</button>
+        <br /><br />
+        <button class="btn outline" data-nav="gameselect">Back</button>
+      </div>
+    </section>
+
+   
+
+    <script src="../controller/js/game.js"></script>
+    <script src="../controller/js/puzzle.js"></script>
+    <script src="../controller/js/heartgame.js"></script>
+    <script src="../controller/js/connect.js?v=2"></script>
+  </body>
+</html>
